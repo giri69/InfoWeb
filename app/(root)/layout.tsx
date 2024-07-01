@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Topbar from "@/Components/shared/Topbar";
-import RightSidebar from "@/Components/shared/RightSidebar";
-import Bottombar from "@/Components/shared/Bottombar";
-import LeftSidebar from "@/Components/shared/LeftSidebar";
+import Topbar from "@/components/shared/Topbar";
+import RightSidebar from "@/components/shared/RightSidebar";
+import Bottombar from "@/components/shared/Bottombar";
+import LeftSidebar from "@/components/shared/LeftSidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Topbar/>
-        <main>
+        <main className="flex flex-row">
           <LeftSidebar/>
           <section className="main-container">
             <div className="w-full max-w-4xl">
