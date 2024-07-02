@@ -34,7 +34,8 @@ interface props{
 }
 const AccountProfile=({user,btnTitle}:props)=>{
   const [files,setFiles]=useState<File[]>([])
-    const form = useForm({
+  const {startUpload}=useUploadThing("media");   
+  const form = useForm({
         resolver:zodResolver(UserValidation),defaultValues:{
             profile_photo: user?.image ||"",
             name: user?.name||"",
@@ -56,13 +57,18 @@ const AccountProfile=({user,btnTitle}:props)=>{
         fileReader.readAsDataURL(file);
       }
     }
-    function onSubmit(values: z.infer<typeof UserValidation>) {
+  
+    const  onSubmit=async(values: z.infer<typeof UserValidation>) =>{
         const blob=values.profile_photo;
         const hasImageChanged= isBase64Image(blob);
         if(hasImageChanged)
           {
-             const imgRes=
+             const imgRes= await startUpload(files)
+             if(imgRes && imgRes[0].url){
+              values.profile_photo=imgRes[0].url;
+             }
           }
+          //todo
 ;      }
     return (
         <Form {...form}>
