@@ -18,6 +18,8 @@ import { Input } from "@/components/ui/input"
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { Textarea } from "../ui/textarea";
+import { isBase64Image } from "@/lib/utils";
+import {useUploadThing} from '@/lib/uploadthing'
 
 interface props{
     user:{
@@ -55,8 +57,13 @@ const AccountProfile=({user,btnTitle}:props)=>{
       }
     }
     function onSubmit(values: z.infer<typeof UserValidation>) {
-        
-      }
+        const blob=values.profile_photo;
+        const hasImageChanged= isBase64Image(blob);
+        if(hasImageChanged)
+          {
+             const imgRes=
+          }
+;      }
     return (
         <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col justify-start gap-10">
